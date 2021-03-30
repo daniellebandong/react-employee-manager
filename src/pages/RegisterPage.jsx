@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FormInput from './../components/forms/FormInput';
+import Button from './../components/buttons/Button'
 const RegisterPageStyles = styled.aside`
     width:480px;
     margin:6rem auto 0;
@@ -14,7 +15,9 @@ const RegisterPageStyles = styled.aside`
     p{
         margin-bottom:1rem;
     }
-
+    button{
+        margin-top:3rem;
+    }
 
 `
 const RegisterPage = (props) => {
@@ -27,6 +30,7 @@ const RegisterPage = (props) => {
         <FormInput label="name on the account: " type="text"/>
         <FormInput label="valid email address: " type="email"/>
         <FormInput label="password(min 6 characters): " type="text"/>
+        <Button uiStyle="signup" label="Create a free account"/>
     </RegisterPageStyles>
      );
 }

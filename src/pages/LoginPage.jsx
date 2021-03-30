@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import FormInput from './../components/forms/FormInput'
-
+import Button from './../components/buttons/Button';
 const LoginPagesStyles = styled.aside`
 width:480px;
 margin:6rem auto 0;
@@ -26,6 +26,7 @@ const LoginPage = (props) => {
             </header>
             <FormInput label="Email Address: " type="email"/>
             <FormInput label="Password: " type="text"/>
+            <Button uiStyle="login" label="login"/>
         </LoginPagesStyles>
      );
 }
