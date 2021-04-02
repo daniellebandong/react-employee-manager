@@ -25,4 +25,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Setting Up a Firebase Project
 
- 
+```npx firebase init```
+
+pickfirestore, hosting and storage for the cli services that we 
