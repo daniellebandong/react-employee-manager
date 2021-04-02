@@ -8,9 +8,8 @@ margin:6rem auto 0;
 header{
     text-align:center;
 }
-h2{
-    font-size:2rem;
-    font-weight:700;
+h1{
+    font-size:2.25rem;
 }
 p{
     margin-bottom:1rem;
@@ -21,7 +20,7 @@ const LoginPage = (props) => {
     return ( 
         <LoginPagesStyles>
             <header>
-                <h2>Login Page</h2>
+                <h1>Login Page</h1>
                 <p>Please enter in your login information below</p>
             </header>
             <FormInput label="Email Address: " type="email"/>
