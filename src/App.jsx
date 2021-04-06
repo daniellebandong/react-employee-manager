@@ -3,7 +3,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PageNotFound from './pages/404';
-import { Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import  {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import AppBar from './components/appbar/AppBar';
 function App() {
 
