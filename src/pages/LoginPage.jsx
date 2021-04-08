@@ -1,10 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import styled from 'styled-components';
 import FormInput from './../components/forms/FormInput'
 import Button from './../components/buttons/Button';
 import {Redirect} from 'react-router-dom';
 
 import firebaseApp from './../firebase/firebaseConfig';
+import AuthContext from 'auth/AuthContext';
 const LoginPagesStyles = styled.aside`
 width:480px;
 margin:6rem auto 0;
@@ -20,6 +21,7 @@ p{
 `
 
 const LoginPage = (props) => {
+    const auth = useContext(AuthContext)
     const[email, setEmail]= useState('daniellebandong@gmail.com')
     const[password, setPassword] = useState('3694Bunnya36940!')
     const[isValid, setIsValid] = useState(false)
@@ -30,7 +32,9 @@ const LoginPage = (props) => {
         firebaseApp.auth().signInWithEmailAndPassword(email, password)
         .then(userCredential=>{
             //email and password input
+            auth.isUser = true
             setIsValid(true)
+
         })
         .catch(error=>{
             console.log(error.code)

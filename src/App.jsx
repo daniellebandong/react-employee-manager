@@ -1,14 +1,17 @@
 import React from 'react';
+import  {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PageNotFound from './pages/404';
 import DashBoard from './pages/dashboard/DashBoard';
-import  {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {AuthProvider} from './auth/AuthContext';
 import AppBar from './components/appbar/AppBar';
 function App() {
 
   return (
+    <AuthProvider>
     <Router>
       <AppBar/>
         <Switch>
@@ -19,6 +22,7 @@ function App() {
           <Route path="*"><PageNotFound/></Route>
         </Switch>
     </Router>
+    </AuthProvider>
   );
 }
 

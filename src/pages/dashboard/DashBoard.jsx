@@ -1,5 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
+
+import AuthContext from './../../auth/AuthContext'
 
 const DashBoardStyles = styled.section`
     display:flex;
@@ -18,7 +21,11 @@ const Panels = styled.section`
     background-color:#f4f4f4;
 `
 const DashBoard = (props) => {
-    return ( 
+
+    //access the authContext
+    const auth = useContext(AuthContext);
+    //conditional rendering, if the auth.isUser is false it needs to redirect to the login page, if it returns true, render the dashboard
+    if(auth.isUser){
         <DashBoardStyles>
             <SideBar>
                 <header>
@@ -34,7 +41,10 @@ const DashBoard = (props) => {
             </SideBar>
             <Panels></Panels>
         </DashBoardStyles>
-     );
+    }else{
+        return <Redirect to="/login"/>
+    }
+
 }
  
 export default DashBoard;
