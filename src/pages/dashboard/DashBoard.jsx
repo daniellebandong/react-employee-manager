@@ -26,7 +26,8 @@ const DashBoard = (props) => {
     const auth = useContext(AuthContext);
     //conditional rendering, if the auth.isUser is false it needs to redirect to the login page, if it returns true, render the dashboard
     if(auth.isUser){
-        <DashBoardStyles>
+        return(
+            <DashBoardStyles>
             <SideBar>
                 <header>
                     <h1>Firebase Whats App</h1>
@@ -41,6 +42,7 @@ const DashBoard = (props) => {
             </SideBar>
             <Panels></Panels>
         </DashBoardStyles>
+        )
     }else{
         return <Redirect to="/login"/>
     }

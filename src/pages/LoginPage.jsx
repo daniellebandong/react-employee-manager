@@ -22,11 +22,10 @@ p{
 
 const LoginPage = (props) => {
     const auth = useContext(AuthContext)
-    const[email, setEmail]= useState('daniellebandong@gmail.com')
-    const[password, setPassword] = useState('3694Bunnya36940!')
+    const[email, setEmail]= useState('')
+    const[password, setPassword] = useState('')
     const[isValid, setIsValid] = useState(false)
 
-    console.log('render')
     const handleClick = (e) =>{
         //test our auth in firebase
         firebaseApp.auth().signInWithEmailAndPassword(email, password)

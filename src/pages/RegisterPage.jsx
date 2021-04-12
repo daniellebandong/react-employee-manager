@@ -1,7 +1,11 @@
-import React from 'react';
+import React,{useContext, useState } from 'react';
 import styled from 'styled-components';
 import FormInput from './../components/forms/FormInput';
 import Button from './../components/buttons/Button'
+import {Redirect} from 'react-router-dom';
+
+import AuthContext from 'auth/AuthContext';
+import firebaseApp from 'firebase/firebaseConfig';
 const RegisterPageStyles = styled.aside`
     width:480px;
     margin:6rem auto 0;
@@ -21,18 +25,39 @@ const RegisterPageStyles = styled.aside`
 
 `
 const RegisterPage = (props) => {
-    return ( 
-    <RegisterPageStyles>
-        <header>
-            <h2>Unlimited Free Trial Sign Up</h2>
-            <p>no credit card required</p>
-        </header>
-        <FormInput label="name on the account: " type="text"/>
-        <FormInput label="valid email address: " type="email"/>
-        <FormInput label="password(min 6 characters): " type="text"/>
-        <Button uiStyle="signup" label="Create a free account"/>
-    </RegisterPageStyles>
-     );
+    const auth = useContext(AuthContext)
+    const [email, setEmail] = useState('');
+    const [ password, setPassword] = useState('');
+    const [user, setUser] = useState('');
+    const[isValid, setIsValid] = useState(false)
+
+    const handleClick = (e) =>{
+        firebaseApp.auth().createUserWithEmailAndPassword(email,password)
+        .then(userCredential =>{
+            auth.isUser = true;
+            setIsValid(true)
+        })
+        .catch(error=>{
+
+        })
+    }
+    if(isValid){
+        return <Redirect to="/login"/>
+    }
+    else{
+        return ( 
+            <RegisterPageStyles>
+                <header>
+                    <h2>Unlimited Free Trial Sign Up</h2>
+                    <p>no credit card required</p>
+                </header>
+                <FormInput label="name on the account: " type="text" onChange = {(e)=> setUser(e.target.value.trim())}/>
+                <FormInput label="valid email address: " type="email" onChange={(e)=> setEmail(e.target.value.trim())}/>
+                <FormInput label="password(min 6 characters): " type="text" onChange={(e)=> setPassword(e.target.value.trim())}/>
+                <Button uiStyle="signup" label="Create a free account" onClick = {handleClick}/>
+            </RegisterPageStyles>
+             );
+    }
 }
  
 export default RegisterPage;
