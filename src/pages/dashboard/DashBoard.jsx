@@ -1,8 +1,12 @@
 import React, {useContext} from 'react'
-import { Redirect } from 'react-router';
+import { Redirect, Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
-
 import AuthContext from './../../auth/AuthContext'
+//local modules
+import ViewAllPanel from 'pages/panels/ViewAllPanel';
+import AddPanel from 'pages/panels/AddPanel';
+import EditPanel from 'pages/panels/EditPanel';
+import DeletePanel from 'pages/panels/DeletePanel';
 
 const DashBoardStyles = styled.section`
     display:flex;
@@ -34,13 +38,20 @@ const DashBoard = (props) => {
                     <p>firebase who new</p>
                 </header>
                 <ul>
-                    <li>view all</li>
-                    <li>add</li>
-                    <li>remove</li>
-                    <li>edit</li>
+                    <li><Link to="/">view all</Link></li>
+                    <li><Link to="">add content</Link></li>
+                    <li><Link to="">remove content</Link></li>
+                    <li><Link to="">edit content</Link></li>
                 </ul>
             </SideBar>
-            <Panels></Panels>
+            <Panels>
+                <Switch>
+                    <Route><ViewAllPanel/></Route>
+                    <Route><AddPanel/></Route>
+                    <Route><DeletePanel/></Route>
+                    <Route><EditPanel/></Route>
+                </Switch>
+            </Panels>
         </DashBoardStyles>
         )
     }else{
