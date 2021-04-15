@@ -18,6 +18,17 @@ const SideBar = styled.aside`
     position:relative;
     z-index:1;
     padding:1rem;
+    h1{
+        font-size:1.5rem;
+    }
+    a{
+        text-decoration:none;
+        font-size:14px;
+    }
+    p{
+        margin-bottom:1rem;
+        color:grey;
+    }
 `
 const Panels = styled.section`
     width:calc(100% - 256px);
@@ -25,7 +36,7 @@ const Panels = styled.section`
     background-color:#f4f4f4;
 `
 const DashBoard = (props) => {
-
+    const {path, url} = useRouteMatch()
     //access the authContext
     const auth = useContext(AuthContext);
     //conditional rendering, if the auth.isUser is false it needs to redirect to the login page, if it returns true, render the dashboard
@@ -38,18 +49,18 @@ const DashBoard = (props) => {
                     <p>firebase who new</p>
                 </header>
                 <ul>
-                    <li><Link to="/">view all</Link></li>
-                    <li><Link to="">add content</Link></li>
-                    <li><Link to="">remove content</Link></li>
-                    <li><Link to="">edit content</Link></li>
+                    <li><Link to={`${url}`}>view all</Link></li>
+                    <li><Link to={`${url}/add`}>add content</Link></li>
+                    <li><Link to={`${url}/delete`}>remove content</Link></li>
+                    <li><Link to={`${url}/edit`}>edit content</Link></li>
                 </ul>
             </SideBar>
             <Panels>
                 <Switch>
-                    <Route><ViewAllPanel/></Route>
-                    <Route><AddPanel/></Route>
-                    <Route><DeletePanel/></Route>
-                    <Route><EditPanel/></Route>
+                    <Route exact path = {path}><ViewAllPanel/></Route>
+                    <Route path={`${path}/add`}><AddPanel/></Route>
+                    <Route path={`${path}/delete`}><DeletePanel/></Route>
+                    <Route path={`${path}/edit`}><EditPanel/></Route>
                 </Switch>
             </Panels>
         </DashBoardStyles>
