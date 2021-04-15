@@ -1,5 +1,7 @@
-import React  from "react";
+import React, {useState, useEffect}  from "react";
 import styled from "styled-components";
+
+import firebaseApp from 'firebase/firebaseConfig'
  
 
 import AddEmployeeWidget from "./widgets/AddEmployeeWidget";
@@ -16,11 +18,26 @@ const ViewAllPanelStyles = styled.section`
 `;
 
 const ViewAll = (props) => {
+  const [employees, setEmployees] = useState([])
+
+  useEffect(()=>{
+    fetchEmployees()
+  }, [])
+  function fetchEmployees(){
+    let docStore;
+    const userId = firebaseApp.auth().currentUser.uid
+    const employeesRef = firebaseApp.firestore().collection(userId).doc('hr').collection('employees')
+    employeesRef
+    .onSnapshot(snapshot=>{
+      docStore = snapshot.docs.map(doc=> doc.data())
+      setEmployees(docStore)
+    })
+  }
   return (
     <section>
       <ViewAllPanelStyles>
         <AddEmployeeWidget />
-        <EmployeeDisplayWidget />
+        <EmployeeDisplayWidget employees ={employees}/>
       </ViewAllPanelStyles>
     </section>
   );
