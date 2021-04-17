@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
-import {v4 as uuidv4} from 'uuid';
-
-import firebaseApp from 'firebase/firebaseConfig';
+import React, {useState}  from 'react';
+import styled from 'styled-components'
+import {v4 as uuidv4} from 'uuid'
+ 
+import firebaseApp from 'firebase/firebaseConfig'
 
 import Button from 'components/buttons/Button';
 import FormInput from 'components/forms/FormInput';
@@ -27,22 +27,20 @@ const WidgetStyles = styled.aside `
 
 
 const AddEmployeeWidget = (props) => {
-  const [name, setName] = useState('');
-  const [department, setDepartment] = useState('');
+  const [name, setName] = useState('')
+  const [department, setDepartment] = useState('')
   
-  function handleInsert(name, department){
-    //make the uuid for a new employee
+  function handleInsert(){
+    //make a uid new employee
     const id = uuidv4().substr(0,8)
     const userId = firebaseApp.auth().currentUser.uid
     const docRef = firebaseApp.firestore().collection(userId).doc('hr').collection('employees').doc(id)
-    console.log(docRef)
     docRef.set({
       id,
       name,
       department
     })
   }
-  
     return ( 
        <WidgetStyles>
           <header>
@@ -51,8 +49,8 @@ const AddEmployeeWidget = (props) => {
                Add New Employee
               </h2>
           </header>
-        <FormInput type="text" label="fullname"  onChange={(e) => setName(e.target.value)}/>
-        <FormInput type="text" label="department" onChange={(e) => setDepartment(e.target.value)}/>
+        <FormInput type="text" label="fullname" onChange={(e)=> setName(e.target.value)} />
+        <FormInput type="text" label="department" onChange={(e)=> setDepartment(e.target.value)}/>
         <Button label="add employee" onClick={handleInsert}/>
        </WidgetStyles>
      );
